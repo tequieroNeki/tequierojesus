@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal - Acceso Concedido</title>
+    <title>Terminal - Access Granted</title>
     <style>
         * {
             box-sizing: border-box;
@@ -109,12 +109,10 @@
             border-radius: 0 4px 4px 0;
         }
 
-        .pixel-heart {
-            color: #ff4081;
-            font-family: monospace;
-            line-height: 1.2;
+        .emoji-heart-line {
+            font-size: 48px;
             margin: 15px 0;
-            white-space: pre;
+            text-align: left;
         }
 
         @keyframes fadeIn {
@@ -143,7 +141,7 @@
             </div>
             <div class="title">neki@marian-heart: ~</div>
         </div>
-        <button class="music-btn" id="musicToggle">🔊 [MÚSICA: OFF]</button>
+        <button class="music-btn" id="musicToggle">🔊 [MUSIC: OFF]</button>
     </div>
     <div class="terminal-body" id="terminal"></div>
 </div>
@@ -156,39 +154,29 @@
     const linesData = [
         { text: "$ ./initialize_heartbeat.sh", type: "command" },
         { text: "Initializing...", type: "info", delay: 800 },
-        { text: "[✓] Cargando mensajes de Jetpack Cat en Instagram...", type: "success" },
-        { text: "[✓] Cargando primer \"hola\"\...", type: "success" },
-        { text: "[✓] Cargando llamadas por Discord...", type: "success" },
-        { text: "[✓] Ejecutando comando: /cast Nanoboost -> Zenyatta (x2)...", type: "success", class: "text-white", delay: 400 },
-        { text: "[✓] Cargando noches en vela...", type: "success" },
-        { text: "[✓] Cargando noches viendo anime...", type: "success" },
-        { text: "[✓] Cargando mariposas en el estómago...", type: "success" },
-        { text: "[✓] Cargando ojos brillosos al mirarte...", type: "success" },
-        { text: "[✓] Cargando primer beso...", type: "success" },
-        { text: "[✓] Cargando abrazos y risas compartidas...", type: "success" },
-        { text: "[✓] Cargando comunicación efectiva y confianza...", type: "success" },
-        { text: "[✓] Cargando apoyo mutuo y química...", type: "success" },
-        { text: "[✓] Cargando atracción, deseo y enamoramiento...", type: "success" },
-        { text: "[✓] Cargando sentimientos y sueños compartidos...", type: "success", delay: 600 },
+        { text: "[✓] Loading Instagram Jetpack Cat messages...", type: "success" },
+        { text: "[✓] Loading first \"hello\"\...", type: "success" },
+        { text: "[✓] Loading Discord voice calls...", type: "success" },
+        { text: "[✓] Executing command: /cast Nanoboost -> Zenyatta (x2)...", type: "success", class: "text-white", delay: 400 },
+        { text: "[✓] Loading sleepless nights together...", type: "success" },
+        { text: "[✓] Loading anime marathon history...", type: "success" },
+        { text: "[✓] Loading butterflies in stomach...", type: "success" },
+        { text: "[✓] Loading sparkling eyes effect...", type: "success" },
+        { text: "[✓] Loading first kiss memory...", type: "success" },
+        { text: "[✓] Loading shared laughs and warm hugs...", type: "success" },
+        { text: "[✓] Loading effective communication protocol and trust...", type: "success" },
+        { text: "[✓] Loading mutual support and chemistry core...", type: "success" },
+        { text: "[✓] Loading attraction, desire, and affection modules...", type: "success" },
+        { text: "[✓] Loading shared feelings and future dreams...", type: "success", delay: 600 },
         { text: "Decrypting heart...", type: "info" },
         { text: "████████████████████ 100%", type: "progress", delay: 1000 },
         { text: "Authenticating...", type: "info", delay: 500 },
         { text: "Access granted.", type: "success", class: "text-blue", delay: 800 },
         { text: "$ cat /etc/heart.conf", type: "command", delay: 600 },
         { text: `owner=Marian\npartner=Neki\ntrust=100%\ncommunication=100%\nlove=∞`, type: "code" },
-        { text: `while(alive){\n    TeQuiero("Neki ❤️");\n}`, type: "code", delay: 800 },
-        { text: "Relationship.exe running... ❤️", type: "heart", class: "text-heart" },
-        { text: `
-   ████     ████
-  ██████   ██████
- ████████ ████████
- ██████/🩹\███████
-  █████/🩹/██████
-   ████/🩹/████
-    ██/🩹/██
-     ███
-`, type: "heart-art", class: "pixel-heart" },
-        { text: "The luckiest programmer alive.", type: "white", class: "text-white" }
+        { text: `while(alive){\n    ILoveYou("Neki ❤️");\n}`, type: "code", delay: 800 },
+        { text: "Relationship.exe running...", type: "heart", class: "text-heart" },
+        { text: "❤️‍🩹", type: "emoji-heart", class: "emoji-heart-line" }
     ];
 
     const terminal = document.getElementById('terminal');
@@ -198,11 +186,11 @@
     musicToggle.addEventListener('click', () => {
         if (bgm.paused) {
             bgm.play().catch(e => console.log("Audio play blocked", e));
-            musicToggle.innerText = "🔊 [MÚSICA: ON]";
+            musicToggle.innerText = "🔊 [MUSIC: ON]";
             musicToggle.style.animation = "none";
         } else {
             bgm.pause();
-            musicToggle.innerText = "🔇 [MÚSICA: OFF]";
+            musicToggle.innerText = "🔇 [MUSIC: OFF]";
         }
     });
 
@@ -224,17 +212,14 @@
         const cursor = createCursor();
         lineDiv.appendChild(cursor);
 
-        let text = lineObj.text;
-        
         if (lineObj.type === 'command') {
+            let text = lineObj.text;
             for (let i = 0; i < text.length; i++) {
                 cursor.before(text[i]);
                 await new Promise(res => setTimeout(res, 50));
             }
-        } else if (lineObj.type === 'heart-art') {
-            lineDiv.innerHTML = text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
-            lineDiv.appendChild(cursor);
         } else {
+            let text = lineObj.text;
             if (lineObj.type === 'code') {
                 lineDiv.innerHTML = text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
                 lineDiv.appendChild(cursor);
